@@ -1,13 +1,15 @@
 package com.personapi.personapi.controller;
 
 
-import com.personapi.personapi.dto.MessageResponseDTO;
-import com.personapi.personapi.model.Person;
+import com.personapi.personapi.dto.request.PersonDTO;
+import com.personapi.personapi.dto.response.MessageResponseDTO;
+
 import com.personapi.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 
 
 @RestController
@@ -23,10 +25,12 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody Person person) {
-        return PersonService.createPerson(person);
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) {
+        return personService.createPerson(personDTO);
 
     }
+
+
 
 
 }
